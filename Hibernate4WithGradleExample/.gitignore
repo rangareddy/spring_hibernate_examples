@@ -10,7 +10,7 @@ logs
 RemoteSystemsTempFiles
 bin
 org.eclipse.jdt.core.prefs
-
+.springBeans
 # Maven
 target
 

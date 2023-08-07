@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ranga.pojo.Login">
+        <id name="loginId" type="long">
+            <generator class="native">
+            </generator>
+        </id>
+
+        <natural-id>
+            <property name="username" type="java.lang.String" length="40">
+            </property>
+        </natural-id>
+
+        <property name="password">
+        </property>
+
+    </class>
+
+</hibernate-mapping>

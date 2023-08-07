@@ -1,0 +1,35 @@
+logs
+
+# Eclipse Setting
+/.metadata
+/Servers
+.settings
+.project
+.classpath
+.buildpath
+RemoteSystemsTempFiles
+bin
+org.eclipse.jdt.core.prefs
+
+# Maven
+target
+
+#idea project
+.idea
+*.iml
+*.iws
+*.ipr
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+.settings/
+.target
+
+.DS_Store
+target/
+dependency-reduced-pom.xml
+build/

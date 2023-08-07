@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+    <!-- Using default handler mapping i.e. BeanNameUrlHandlerMapping i.e. any request with URL  /multiAction/*.do will be handled by MultiActionFormController-->
+    <!-- The InternalPathMethodNameResolver is the default MultiActionController implementation to map URL to method name.  -->
+ 
+    <bean name="/multiAction/*.do" class="com.ranga.MultiActionFormController">
+        <property name="methodNameResolver" ref="methodNameResolver"></property>
+    </bean>
+    
+    <bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+         
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+         <property name="prefix" value="/WEB-INF/jsp/"></property>
+         <property name="suffix" value=".jsp"></property>
+    </bean>
+</beans>

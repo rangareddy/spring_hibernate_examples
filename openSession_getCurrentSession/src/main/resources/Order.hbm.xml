@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 24, 2013 6:39:32 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ranga.pojo.Order" table="ORDERS">
+        <id name="orderId" type="long">
+            <column name="ORDERID" />
+            <generator class="native" />
+        </id>
+        <property name="orderName" type="java.lang.String">
+            <column name="ORDERNAME" />
+        </property>
+        <property name="orderDate" type="java.util.Date">
+            <column name="ORDERDATE" />
+        </property>
+    </class>
+</hibernate-mapping>

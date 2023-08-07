@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 22, 2014 8:09:37 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.ranga.pojo.Employee" table="EMPLOYEE">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>  
+        
+        <natural-id>
+            <property name="name" type="string" column="NAME"/>
+        </natural-id>
+        
+        <property name="age" type="int">
+            <column name="AGE" />
+        </property>
+        <property name="salary" type="float">
+            <column name="SALARY" />
+        </property>
+    </class>
+</hibernate-mapping>

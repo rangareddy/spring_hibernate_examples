@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.varasofttech.pojo">
+
+	<!-- Table-per-class hierarchy -->
+	<class name="Person" table="Persons">
+		<id name="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="firstName" />
+		<property name="lastName" />
+		<property name="age" />
+	</class>
+
+	<class name="Employee" table="Employees">
+		<id name="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="firstName" />
+		<property name="lastName" />
+		<property name="age" />
+		<property name="designation" />
+		<property name="salary" />
+	</class>
+
+	<class name="PermanentEmployee" table="PermanentEmployees">
+		<id name="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="firstName" />
+		<property name="lastName" />
+		<property name="age" />
+		<property name="designation" />
+		<property name="salary" />
+		<property name="allowance" />
+		<property name="noOfLeaves" />
+	</class>
+	
+		<!-- Table-per-subclass -->
+		<!-- 	<class name="Person" table="Persons1" discriminator-value="Persons">
+		<id name="id">
+			<generator class="increment" />
+		</id>
+		<discriminator column="Person_Type" type="string" />
+		<property name="firstName" />
+		<property name="lastName" />
+		<property name="age" />
+
+		<subclass name="Employee" discriminator-value="Employees">
+			<property name="designation" />
+			<property name="salary" />
+		</subclass>
+
+		<subclass name="PermanentEmployee" discriminator-value="Permanent_Employees">
+			<property name="designation" />
+			<property name="salary" />
+			<property name="allowance" />
+			<property name="noOfLeaves" />
+		</subclass>
+	</class>  -->
+	
+	<!-- Table-per-concrete class -->
+	<!-- <class name="Person" table="Persons">
+		<id name="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="firstName" />
+		<property name="lastName" />
+		<property name="age" />
+		<joined-subclass name="Employee" table="Employees">
+			<key column="id" />
+			<property name="designation" />
+			<property name="salary" />
+			<joined-subclass name="PermanentEmployee" table="PermanentEmployees">
+				<key column="id" />
+				<property name="allowance" />
+				<property name="noOfLeaves" />
+			</joined-subclass>
+		</joined-subclass>
+	</class>  -->
+	
+</hibernate-mapping>

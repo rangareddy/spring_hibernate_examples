@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+  		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+  		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+  		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:component-scan base-package="com.varasofttech.controller, com.varasofttech.service, com.varasofttech.dao" />	
+	<context:property-placeholder location="classpath:hiberante.properties" />
+	
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		
+		<!-- access -->
+		<property name="driverClass" value="${database.driverClass}" />
+		<property name="jdbcUrl" value="${database.url}" />
+		<property name="user" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+		
+		<!-- pool sizing -->
+		<property name="initialPoolSize" value="${connection.initialPoolSize}" />
+		<property name="maxPoolSize" value="${connection.maxPoolSize}" />
+		<property name="minPoolSize" value="${connection.minPoolSize}" />
+		<property name="maxStatements" value="${connection.maxStatements}" />
+		<property name="acquireIncrement" value="${connection.acquireIncrement}" />			
+		
+		<!-- timeouts and testing -->
+		<property name="testConnectionOnCheckout" value="${connection.testConnection}" />
+		
+		<!-- refreshing connections -->
+		<property name="maxIdleTime" value="${connection.maxIdleTime}" />
+		<property name="maxConnectionAge" value="${connection.maxConnectionAge}" /> 		
+	</bean>	
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" ref="packagesToScanProps"/>
+		<property name="hibernateProperties" ref="hibernatePropertiesProps"/>
+	</bean>
+	
+	<util:list id="packagesToScanProps">
+	    <value>com.varasofttech.business</value>
+	</util:list>
+
+	<util:properties id="hibernatePropertiesProps">
+	    <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+		<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+		<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+	</util:properties>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	 <tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="prefix" value="/WEB-INF/jsp/" />
+	    <property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>

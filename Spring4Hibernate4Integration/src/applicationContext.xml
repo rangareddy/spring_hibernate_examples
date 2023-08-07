@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="com.ranga"></context:component-scan>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${database.driverClass}" />
+		<property name="jdbcUrl" value="${database.url}" />
+		<property name="user" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+		<property name="initialPoolSize" value="3" />
+		<property name="minPoolSize" value="1" />
+		<property name="maxPoolSize" value="10" />
+		<property name="idleConnectionTestPeriod" value="200" />		
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">		
+		<property name="dataSource" ref="dataSource"></property>		
+		<!-- Configuring the  Hibernate properties -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>				
+				<prop key="hibernate.current_session_context_class">${hibernate.current_session_context_class}</prop>					
+			</props>		
+		</property>
+		
+		<property name="mappingResources">
+			<list>
+				<value>com/ranga/hbm/Employee.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<context:property-placeholder location="database.properties, hibernate.properties"/>
+
+</beans>

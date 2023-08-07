@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- traditional declaration --> 	
+	<bean id="classic_employee" class="com.ranga.Employee">
+		<constructor-arg value="143"></constructor-arg>
+		<constructor-arg value="Ranga Reddy"></constructor-arg>
+		<constructor-arg value="25"></constructor-arg>
+		<constructor-arg value="50000"></constructor-arg>			
+	</bean>	
+	<!-- c­-namespace declaration --> 	
+	<bean id="c_namespace_employee" class="com.ranga.Employee"
+	  c:id="123" c:name="Raja Reddy" c:age="25" c:salary="130000">				
+	</bean>
+</beans>
